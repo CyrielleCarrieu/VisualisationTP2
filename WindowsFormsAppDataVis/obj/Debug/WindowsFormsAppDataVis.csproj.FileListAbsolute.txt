@@ -1,0 +1,10 @@
+D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\bin\Debug\WindowsFormsAppDataVis.exe.config
+D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\bin\Debug\WindowsFormsAppDataVis.exe
+D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\bin\Debug\WindowsFormsAppDataVis.pdb
+D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.csprojAssemblyReference.cache
+D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.Properties.Resources.resources
+D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.csproj.GenerateResource.cache
+D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.csproj.CoreCompileInputs.cache
+D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.exe
+D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.pdb
+D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.Form1.resources
