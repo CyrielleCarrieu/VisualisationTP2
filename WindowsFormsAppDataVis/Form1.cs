@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,7 @@ namespace WindowsFormsAppDataVis
             InitializeComponent();
         }
 
+                                        // TODO : faire la variation de z + ajouter le changement de couleur grâce aux 2 carré + zoom souris avec la molette + drag and drop)
 
         Dictionary<int, List<Record>> dic = new Dictionary<int, List<Record>>();
         Record min = new Record();
@@ -115,18 +117,91 @@ namespace WindowsFormsAppDataVis
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+            int w = pictureBox1.Width;
+            int h = pictureBox1.Height;
+            Color minColor = pictureBoxMinColor.BackColor;
+            Color maxColor = pictureBoxMaxColor.BackColor;
 
             if (dic != null)
             {
                 //Show points
                 foreach (var traj in dic)
                 {
+                    
+                    Boolean isFirstRecord = true;
+                    Record rec0 = new Record();
                     foreach (var rec in traj.Value)
                     {
-                        g.DrawEllipse(Pens.Black, (float)rec.x / (float)max.x * pictureBox1.Width, (float)rec.y / (float)max.y * pictureBox1.Height, 2, 2);
+                        SolidBrush p = new SolidBrush(Color.FromArgb(alpha, (int)GenericScaleDouble(rec.z, min.z, minColor.R, max.z, maxColor.R),
+                        (int)GenericScaleDouble(rec.z, min.z, minColor.G, max.z, maxColor.G),
+                        (int)GenericScaleDouble(rec.z, min.z, minColor.B, max.z, maxColor.B)));
+
+                        if (!isFirstRecord)
+                        {
+
+                            float p0_x = pan.X + (float)GenericScaleDouble(rec0.x, min.x, 0, max.x, w);
+                            float p0_y = pan.Y + (float)GenericScaleDouble(rec0.y, min.y, h, max.y, 0);
+                            float p1_x = pan.X + (float)GenericScaleDouble(rec.x, min.x, 0, max.x, w);
+                            float p1_y = pan.Y + (float)GenericScaleDouble(rec.y, min.y, h, max.y, 0);
+                            g.DrawLine(new Pen(Color.Black), p0_x, p0_y, p1_x, p1_y);
+                        }
+                        rec0 = rec;
+                        isFirstRecord = false;
                     }
                 }
 
+            }
+        }
+
+        public static double GenericScaleDouble(double input, double i1, double o1, double i2, double o2)
+        {
+            if (i2 == i1)
+                return o1;
+            double a = (o2 - o1) / (i2 - i1);
+            double b = o1 - a * i1;
+            return (a * input + b);
+
+        }
+
+        int alpha = 50;
+        private void trackBarAlpha_Scroll(object sender, EventArgs e)
+        {
+            alpha = trackBarAlpha.Value;
+            pictureBox1.Invalidate();
+        }
+        int red;
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            red = trackBar1.Value;
+            pictureBox1.Invalidate();
+        }
+
+        Point pan;
+        Point mouseDown;
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {if (e.Button == MouseButtons.Left)
+            {
+                //Move
+                //pan = new Point(-mouseDown.X);
+                pictureBox1.Invalidate();
+            }
+
+        }
+        private void pictureBoxMinColor_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxMinColor.BackColor = colorDialog1.Color;
+                pictureBox1.Invalidate();
+            }
+        }
+
+        private void pictureBoxMaxColor_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxMaxColor.BackColor = colorDialog1.Color;
+                pictureBox1.Invalidate();
             }
         }
     }

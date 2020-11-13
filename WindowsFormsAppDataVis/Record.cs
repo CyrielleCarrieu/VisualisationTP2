@@ -9,7 +9,7 @@ namespace WindowsFormsAppDataVis
     public class Record
     {
         public int id;
-        public string time;  // ne pas mettre nen string
+        public string time;  // ne pas mettre en string
         public double x;
         public double y;
         public double z;
