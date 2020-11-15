@@ -8,3 +8,13 @@ D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\obj\Debug\WindowsF
 D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.exe
 D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.pdb
 D:\Visual Basic\WindowsFormsAppDataVis\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.Form1.resources
+D:\M2 IHM\Visualisation\TP\VisualisationTP2\WindowsFormsAppDataVis\bin\Debug\WindowsFormsAppDataVis.exe.config
+D:\M2 IHM\Visualisation\TP\VisualisationTP2\WindowsFormsAppDataVis\bin\Debug\WindowsFormsAppDataVis.exe
+D:\M2 IHM\Visualisation\TP\VisualisationTP2\WindowsFormsAppDataVis\bin\Debug\WindowsFormsAppDataVis.pdb
+D:\M2 IHM\Visualisation\TP\VisualisationTP2\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.csprojAssemblyReference.cache
+D:\M2 IHM\Visualisation\TP\VisualisationTP2\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.Form1.resources
+D:\M2 IHM\Visualisation\TP\VisualisationTP2\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.Properties.Resources.resources
+D:\M2 IHM\Visualisation\TP\VisualisationTP2\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.csproj.GenerateResource.cache
+D:\M2 IHM\Visualisation\TP\VisualisationTP2\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.csproj.CoreCompileInputs.cache
+D:\M2 IHM\Visualisation\TP\VisualisationTP2\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.exe
+D:\M2 IHM\Visualisation\TP\VisualisationTP2\WindowsFormsAppDataVis\obj\Debug\WindowsFormsAppDataVis.pdb

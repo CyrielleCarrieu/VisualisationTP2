@@ -20,7 +20,7 @@ namespace WindowsFormsAppDataVis
             InitializeComponent();
         }
 
-                                        // TODO : faire la variation de z + ajouter le changement de couleur grâce aux 2 carré + zoom souris avec la molette + drag and drop)
+                                        // TODO : faire la variation de z + zoom souris avec la molette + drag and drop
 
         Dictionary<int, List<Record>> dic = new Dictionary<int, List<Record>>();
         Record min = new Record();
@@ -35,7 +35,7 @@ namespace WindowsFormsAppDataVis
             string line = sr.ReadLine(); //read the field names
             line = sr.ReadLine();
 
-
+            #region Recupération des données
             while (line != null)
             {
 
@@ -64,7 +64,9 @@ namespace WindowsFormsAppDataVis
                 line = sr.ReadLine();
 
             }
+            #endregion
 
+            #region Normalisation Faire pour times
             //data_normalization
             //Ajouter le temps
             min.x = double.MaxValue;
@@ -107,6 +109,7 @@ namespace WindowsFormsAppDataVis
                 }
             }
         }
+        #endregion
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
@@ -132,9 +135,10 @@ namespace WindowsFormsAppDataVis
                     Record rec0 = new Record();
                     foreach (var rec in traj.Value)
                     {
-                        SolidBrush p = new SolidBrush(Color.FromArgb(alpha, (int)GenericScaleDouble(rec.z, min.z, minColor.R, max.z, maxColor.R),
-                        (int)GenericScaleDouble(rec.z, min.z, minColor.G, max.z, maxColor.G),
-                        (int)GenericScaleDouble(rec.z, min.z, minColor.B, max.z, maxColor.B)));
+                        SolidBrush p = new SolidBrush(Color.FromArgb(alpha, 
+                            (int)GenericScaleDouble(rec.z, min.z, minColor.R, max.z, maxColor.R),
+                            (int)GenericScaleDouble(rec.z, min.z, minColor.G, max.z, maxColor.G),
+                            (int)GenericScaleDouble(rec.z, min.z, minColor.B, max.z, maxColor.B)));
 
                         if (!isFirstRecord)
                         {
@@ -143,10 +147,14 @@ namespace WindowsFormsAppDataVis
                             float p0_y = pan.Y + (float)GenericScaleDouble(rec0.y, min.y, h, max.y, 0);
                             float p1_x = pan.X + (float)GenericScaleDouble(rec.x, min.x, 0, max.x, w);
                             float p1_y = pan.Y + (float)GenericScaleDouble(rec.y, min.y, h, max.y, 0);
-                            g.DrawLine(new Pen(Color.Black), p0_x, p0_y, p1_x, p1_y);
+                            g.DrawLine(new Pen(p), p0_x, p0_y, p1_x, p1_y);
                         }
                         rec0 = rec;
                         isFirstRecord = false;
+                        /*  Affichage de points
+                         * g.FillEllipse(tb,pan.X+(float)GenericScaleDouble((float)rec.x, min.x, 0, max.x, w),
+                                     pan.Y+(float)GenericScaleDouble((float)rec.y, min.y, h, max.y, 0), 2, 2);
+                         */
                     }
                 }
 
@@ -176,22 +184,13 @@ namespace WindowsFormsAppDataVis
             pictureBox1.Invalidate();
         }
 
-        Point pan;
-        Point mouseDown;
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {if (e.Button == MouseButtons.Left)
-            {
-                //Move
-                //pan = new Point(-mouseDown.X);
-                pictureBox1.Invalidate();
-            }
-
-        }
+        
         private void pictureBoxMinColor_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 pictureBoxMinColor.BackColor = colorDialog1.Color;
+                pictureBox1.BackColor = colorDialog1.Color;
                 pictureBox1.Invalidate();
             }
         }
@@ -201,8 +200,28 @@ namespace WindowsFormsAppDataVis
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 pictureBoxMaxColor.BackColor = colorDialog1.Color;
+                pictureBox1.BackColor = colorDialog1.Color;
                 pictureBox1.Invalidate();
             }
+        }
+
+        Point pan;
+        Point mouseDown;
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = e.Location;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                //Move
+                pan = new Point(e.Location.X, e.Location.Y);
+                pictureBox1.Invalidate();
+            }
+
         }
     }
 }
