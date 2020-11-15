@@ -108,14 +108,10 @@ namespace WindowsFormsAppDataVis
                     }
                 }
             }
-        }
-        #endregion
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            int index = (int)numericUpDown1.Value;
-            recordInfos.Text = dic[index][0].ToString() + "(" + dic[index].Count.ToString() + ")";
+            #endregion
         }
+
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
@@ -143,21 +139,21 @@ namespace WindowsFormsAppDataVis
                         if (!isFirstRecord)
                         {
 
-                            float p0_x = pan.X + (float)GenericScaleDouble(rec0.x, min.x, 0, max.x, w);
-                            float p0_y = pan.Y + (float)GenericScaleDouble(rec0.y, min.y, h, max.y, 0);
-                            float p1_x = pan.X + (float)GenericScaleDouble(rec.x, min.x, 0, max.x, w);
-                            float p1_y = pan.Y + (float)GenericScaleDouble(rec.y, min.y, h, max.y, 0);
+                            float p0_x = zoom * (pan.X + (float)GenericScaleDouble(rec0.x, min.x, 0, max.x, w));
+                            float p0_y = zoom * (pan.Y + (float)GenericScaleDouble(rec0.y, min.y, h, max.y, 0));
+                            float p1_x = zoom * (pan.X + (float)GenericScaleDouble(rec.x, min.x, 0, max.x, w));
+                            float p1_y = zoom * (pan.Y + (float)GenericScaleDouble(rec.y, min.y, h, max.y, 0));
                             g.DrawLine(new Pen(p), p0_x, p0_y, p1_x, p1_y);
                         }
                         rec0 = rec;
                         isFirstRecord = false;
+
                         /*  Affichage de points
                          * g.FillEllipse(tb,pan.X+(float)GenericScaleDouble((float)rec.x, min.x, 0, max.x, w),
                                      pan.Y+(float)GenericScaleDouble((float)rec.y, min.y, h, max.y, 0), 2, 2);
                          */
                     }
                 }
-
             }
         }
 
@@ -169,6 +165,13 @@ namespace WindowsFormsAppDataVis
             double b = o1 - a * i1;
             return (a * input + b);
 
+        }
+
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            int index = (int)numericUpDown1.Value;
+            recordInfos.Text = dic[index][0].ToString() + "(" + dic[index].Count.ToString() + ")";
         }
 
         int alpha = 50;
@@ -222,6 +225,22 @@ namespace WindowsFormsAppDataVis
                 pictureBox1.Invalidate();
             }
 
+        }
+
+        float zoom = 1f;
+        private void pictureBox1_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            //pan = new Point(e.X, e.Y);
+            if (e.Delta > 0)
+            {
+                zoom += 0.1f;
+            }
+            else
+            {
+                zoom -= 0.1f;
+            }
+
+            pictureBox1.Invalidate();
         }
     }
 }
